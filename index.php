@@ -1,6 +1,47 @@
 <?php
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
+//массив проектов
+$projects = ["Входящие", "Учеба", "Работа", "Домашние дела", "Авто"];
+//массив задач
+$tasks = [
+	[
+		'Задача' => 'Собеседование в IT компании',
+		'Дата выполнения' => '01.12.2019',
+		'Категория' => 'Работа',
+		'Выполнен' => false
+	],
+	[
+		'Задача' => 'Выполнить тестовое задание',
+		'Дата выполнения' => '25.12.2019',
+		'Категория' => 'Работа',
+		'Выполнен' => false
+	],
+	[
+		'Задача' => 'Сделать задание первого раздела',
+		'Дата выполнения' => '21.12.2019',
+		'Категория' => 'Учеба',
+		'Выполнен' => true
+	],
+	[
+		'Задача' => 'Встреча с другом',
+		'Дата выполнения' => '25.12.2019',
+		'Категория' => 'Входящие',
+		'Выполнен' => false
+	],
+	[
+		'Задача' => 'Купить корм для кота',
+		'Дата выполнения' => null,
+		'Категория' => 'Домашние дела',
+		'Выполнен' => false
+	],
+	[
+		'Задача' => 'Заказать пиццу',
+		'Дата выполнения' => null,
+		'Категория' => 'Домашние дела',
+		'Выполнен' => false
+	]
+];
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -42,10 +83,12 @@ $show_complete_tasks = rand(0, 1);
 
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
+						<?php foreach ($projects as $key => $val): ?>
                         <li class="main-navigation__list-item">
-                            <a class="main-navigation__list-item-link" href="#">Название проекта</a>
+                            <a class="main-navigation__list-item-link" href="#"><?= $val; ?></a>
                             <span class="main-navigation__list-item-count">0</span>
                         </li>
+						<?php endforeach; ?>
                     </ul>
                 </nav>
 
@@ -78,20 +121,23 @@ $show_complete_tasks = rand(0, 1);
                 </div>
 
                 <table class="tasks">
-                    <tr class="tasks__item task">
+					<?php foreach ($tasks as $key => $val): ?>
+					<?php 
+						if ($val['Выполнен'] == ($show_complete_tasks === 0)) {
+							continue;
+						}
+					?>
+                    <tr class="tasks__item task <?= $val['Выполнен'] == 1 ? 'task--completed' : '' ?>">
                         <td class="task__select">
                             <label class="checkbox task__checkbox">
-                                <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
-                                <span class="checkbox__text">Сделать главную страницу Дела в порядке</span>
+                                <input class="checkbox__input visually-hidden" type="checkbox" <?= $val['Выполнен'] == 1 ? 'checked' : '' ?> >
+                                <span class="checkbox__text"><?= $val['Задача']; ?></span>
                             </label>
                         </td>
 
-                        <td class="task__file">
-                            <a class="download-link" href="#">Home.psd</a>
-                        </td>
-
-                        <td class="task__date"></td>
+                        <td class="task__date"><?= $val['Дата выполнения']; ?></td>
                     </tr>
+					<?php endforeach; ?>
 					<?php if ($show_complete_tasks === 1): ?>
                     <tr class="tasks__item task task--completed">
                         <td class="task__select">
