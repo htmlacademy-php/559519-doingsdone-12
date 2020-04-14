@@ -123,7 +123,7 @@ $tasks = [
                 <table class="tasks">
 					<?php foreach ($tasks as $task): ?>
 					<?php 
-						if ($task['completed'] == ($show_complete_tasks === 0)) {
+						if ($task['completed'] && ($show_complete_tasks === 0)) {
 							continue;
 						}
 					?>
