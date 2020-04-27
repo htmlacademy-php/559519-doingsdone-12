@@ -42,6 +42,16 @@ $tasks = [
 		'completed' => false
 	]
 ];
+//подсчет задач
+function task_count ($tasks, $project_name) {
+    $count = 0;
+    foreach ($tasks as $task) {
+        if ($task['category'] == $project_name) {
+            $count++;
+        }
+    }
+    return $count;
+}
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -86,7 +96,7 @@ $tasks = [
 						<?php foreach ($projects as $project): ?>
                         <li class="main-navigation__list-item">
                             <a class="main-navigation__list-item-link" href="#"><?= $project; ?></a>
-                            <span class="main-navigation__list-item-count">0</span>
+                            <span class="main-navigation__list-item-count"><?= task_count($tasks, $project)?></span>
                         </li>
 						<?php endforeach; ?>
                     </ul>
@@ -122,7 +132,7 @@ $tasks = [
 
                 <table class="tasks">
 					<?php foreach ($tasks as $task): ?>
-					<?php 
+					<?php
 						if ($task['completed'] && ($show_complete_tasks === 0)) {
 							continue;
 						}
