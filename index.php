@@ -43,10 +43,11 @@ $tasks = [
 	]
 ];
 //подсчет задач
-function task_count ($tasks, $project_name) {
+function task_count(array $projects, $project_name) : int
+{
     $count = 0;
-    foreach ($tasks as $task) {
-        if ($task['category'] == $project_name) {
+    foreach ($projects as $project) {
+        if ($project['category'] === $project_name) {
             $count++;
         }
     }
