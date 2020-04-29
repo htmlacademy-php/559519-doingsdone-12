@@ -8,40 +8,51 @@ $tasks = [
 	[
 		'name' => 'Собеседование в IT компании',
 		'complete_date' => '01.12.2019',
-		'category' => 'Работа',
+		'project_name' => 'Работа',
 		'completed' => false
 	],
 	[
 		'name' => 'Выполнить тестовое задание',
 		'complete_date' => '25.12.2019',
-		'category' => 'Работа',
+		'project_name' => 'Работа',
 		'completed' => false
 	],
 	[
 		'name' => 'Сделать задание первого раздела',
 		'complete_date' => '21.12.2019',
-		'category' => 'Учеба',
+		'project_name' => 'Учеба',
 		'completed' => true
 	],
 	[
 		'name' => 'Встреча с другом',
 		'complete_date' => '25.12.2019',
-		'category' => 'Входящие',
+		'project_name' => 'Входящие',
 		'completed' => false
 	],
 	[
 		'name' => 'Купить корм для кота',
 		'complete_date' => null,
-		'category' => 'Домашние дела',
+		'project_name' => 'Домашние дела',
 		'completed' => false
 	],
 	[
 		'name' => 'Заказать пиццу',
 		'complete_date' => null,
-		'category' => 'Домашние дела',
+		'project_name' => 'Домашние дела',
 		'completed' => false
 	]
 ];
+//подсчет задач
+function task_count(array $tasks_array, $project_name) : int
+{
+    $count = 0;
+    foreach ($tasks_array as $task_item) {
+        if ($task_item['project_name'] === $project_name) {
+            $count++;
+        }
+    }
+    return $count;
+}
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -86,7 +97,7 @@ $tasks = [
 						<?php foreach ($projects as $project): ?>
                         <li class="main-navigation__list-item">
                             <a class="main-navigation__list-item-link" href="#"><?= $project; ?></a>
-                            <span class="main-navigation__list-item-count">0</span>
+                            <span class="main-navigation__list-item-count"><?= task_count($tasks, $project)?></span>
                         </li>
 						<?php endforeach; ?>
                     </ul>
@@ -122,7 +133,7 @@ $tasks = [
 
                 <table class="tasks">
 					<?php foreach ($tasks as $task): ?>
-					<?php 
+					<?php
 						if ($task['completed'] && ($show_complete_tasks === 0)) {
 							continue;
 						}
