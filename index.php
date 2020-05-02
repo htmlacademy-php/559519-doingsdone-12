@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set("display_error", true);
+ini_set("error_reporting", E_ALL);
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
 //Заголовок страницы
@@ -44,34 +47,8 @@ $tasks = [
 		'completed' => false
 	]
 ];
-//подсчет задач
-function task_count(array $tasks_array, $project_name) : int
-{
-    $count = 0;
-    foreach ($tasks_array as $task_item) {
-        if ($task_item['project_name'] === $project_name) {
-            $count++;
-        }
-    }
-    return $count;
-}
-function include_template($name, array $data = []) {
-    $name = 'templates/' . $name;
-    $result = '';
-
-    if (!is_readable($name)) {
-        return $result;
-    }
-
-    ob_start();
-    extract($data);
-    require $name;
-
-    $result = ob_get_clean();
-
-    return $result;
-}
-$page_content = include_template('main.php', ['projects' => $projects, 'tasks' => $tasks]);
+require_once('functions/template.php');
+$page_content = include_template('main.php', ['projects' => $projects, 'tasks' => $tasks, 'show_complete_tasks' => $show_complete_tasks]);
 $layout_content = include_template('layout.php', ['content' => $page_content, 'title' => $title]);
 print($layout_content);
 ?>
