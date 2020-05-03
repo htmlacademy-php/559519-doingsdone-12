@@ -43,11 +43,14 @@
                 <table class="tasks">
 					<?php foreach ($tasks as $task): ?>
 					<?php
+                        $complete_date = strtotime($task['complete_date']);
+                        $current_date = strtotime('now');
+                        $difference_date = floor(($complete_date - $current_date) / 3600);
 						if ($task['completed'] && ($show_complete_tasks === 0)) {
 							continue;
 						}
 					?>
-                    <tr class="tasks__item task <?= $task['completed'] ? 'task--completed' : '' ?>">
+                    <tr class="tasks__item task <?= $task['completed'] ? 'task--completed' : '' ?><?= $difference_date > 0 && $difference_date <= 24 ? 'task--important' :  '' ?>">
                         <td class="task__select">
                             <label class="checkbox task__checkbox">
                                 <input class="checkbox__input visually-hidden" type="checkbox" <?= $task['completed'] ? 'checked' : '' ?> >

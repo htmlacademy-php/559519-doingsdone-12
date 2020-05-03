@@ -12,13 +12,13 @@ $projects = ['Входящие', 'Учеба', 'Работа', 'Домашние
 $tasks = [
 	[
 		'name' => 'Собеседование в IT компании',
-		'complete_date' => '01.12.2019',
+		'complete_date' => '06.05.2020',
 		'project_name' => 'Работа',
 		'completed' => false
 	],
 	[
 		'name' => 'Выполнить тестовое задание',
-		'complete_date' => '25.12.2019',
+		'complete_date' => '04.05.2020',
 		'project_name' => 'Работа',
 		'completed' => false
 	],
@@ -30,7 +30,7 @@ $tasks = [
 	],
 	[
 		'name' => 'Встреча с другом',
-		'complete_date' => '25.12.2019',
+		'complete_date' => '05.05.2020',
 		'project_name' => 'Входящие',
 		'completed' => false
 	],
