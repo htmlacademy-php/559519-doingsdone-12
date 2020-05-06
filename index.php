@@ -12,13 +12,13 @@ $projects = ['Входящие', 'Учеба', 'Работа', 'Домашние
 $tasks = [
 	[
 		'name' => 'Собеседование в IT компании',
-		'complete_date' => '06.05.2020',
+		'complete_date' => '08.05.2020',
 		'project_name' => 'Работа',
 		'completed' => false
 	],
 	[
 		'name' => 'Выполнить тестовое задание',
-		'complete_date' => '04.05.2020',
+		'complete_date' => '05.05.2020',
 		'project_name' => 'Работа',
 		'completed' => false
 	],
@@ -30,7 +30,7 @@ $tasks = [
 	],
 	[
 		'name' => 'Встреча с другом',
-		'complete_date' => '05.05.2020',
+		'complete_date' => '7.05.2020',
 		'project_name' => 'Входящие',
 		'completed' => false
 	],
@@ -51,4 +51,3 @@ require_once('functions/template.php');
 $page_content = include_template('main.php', ['projects' => $projects, 'tasks' => $tasks, 'show_complete_tasks' => $show_complete_tasks]);
 $layout_content = include_template('layout.php', ['content' => $page_content, 'title' => $title]);
 print($layout_content);
-?>

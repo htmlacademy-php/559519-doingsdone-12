@@ -28,3 +28,13 @@ function include_template($name, array $data = []) : string
 
     return $result;
 }
+//функция выделят дела, до даты выполнения которых осталось меньше 24 часов
+function getHoursBeforeDate($complete_date)
+{
+    $current_date = time();
+    $hours_before = floor((strtotime($complete_date) - $current_date) / 3600);
+    if ($hours_before < 0) {
+        $hours_before = 0;
+    }
+    return $hours_before;
+}
