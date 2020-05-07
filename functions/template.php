@@ -1,5 +1,10 @@
 <?php
-//подсчет задач
+/**
+ * Подсчитывает количество задач в каждом из проектов
+ * @param array $tasks_array Ассоциативный массив с данными
+ * @param string $project_name Название проекта
+ * @return int Если для аргумента $project_name не найдено элементов в массиве, то вернет ноль
+ */
 function task_count(array $tasks_array, $project_name) : int
 {
     $count = 0;
@@ -10,7 +15,12 @@ function task_count(array $tasks_array, $project_name) : int
     }
     return $count;
 }
-//подключает шаблон, передает туда данные и возвращает итоговый HTML контент
+/**
+ * Подключает шаблон, передает туда данные и возвращает итоговый HTML контент
+ * @param string $name Путь к файлу шаблона относительно папки templates
+ * @param array $data Ассоциативный массив с данными для шаблона
+ * @return string Итоговый HTML
+ */
 function include_template($name, array $data = []) : string
 {
     $name = 'templates/' . $name;
@@ -28,13 +38,17 @@ function include_template($name, array $data = []) : string
 
     return $result;
 }
-//функция выделят дела, до даты выполнения которых осталось меньше 24 часов
-function getHoursBeforeDate($complete_date)
+/**
+ * Подсчитывает количество часов оставшихся до выполнения задачи
+ * @param string $complete_date Дата выполнения задачи
+ * @return int Количество часов
+ */
+function getHoursBeforeDate(string $complete_date) : int
 {
     $current_date = time();
     $hours_before = floor((strtotime($complete_date) - $current_date) / 3600);
     if ($hours_before < 0) {
-        $hours_before = 0;
+        return false;
     }
     return $hours_before;
 }

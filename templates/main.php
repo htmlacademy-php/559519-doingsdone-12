@@ -43,7 +43,9 @@
                 <table class="tasks">
 					<?php foreach ($tasks as $task): ?>
 					<?php
-                        $hours_remaining = getHoursBeforeDate($task['complete_date']);
+                        if ($task['complete_date'] != null) {
+                            $hours_remaining = getHoursBeforeDate($task['complete_date']);
+                        }
 						if ($task['completed'] && ($show_complete_tasks === 0)) {
 							continue;
 						}
