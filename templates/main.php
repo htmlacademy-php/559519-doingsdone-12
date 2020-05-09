@@ -43,11 +43,14 @@
                 <table class="tasks">
 					<?php foreach ($tasks as $task): ?>
 					<?php
+                        if ($task['complete_date'] != null) {
+                            $hours_remaining = getHoursBeforeDate($task['complete_date']);
+                        }
 						if ($task['completed'] && ($show_complete_tasks === 0)) {
 							continue;
 						}
 					?>
-                    <tr class="tasks__item task <?= $task['completed'] ? 'task--completed' : '' ?>">
+                    <tr class="tasks__item task <?= $task['completed'] ? 'task--completed' : '' ?><?= $hours_remaining > 0 && $hours_remaining <= 24 ? 'task--important' :  '' ?>">
                         <td class="task__select">
                             <label class="checkbox task__checkbox">
                                 <input class="checkbox__input visually-hidden" type="checkbox" <?= $task['completed'] ? 'checked' : '' ?> >
