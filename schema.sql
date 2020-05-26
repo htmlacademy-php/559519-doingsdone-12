@@ -16,6 +16,9 @@ CREATE TABLE projects (
 	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
 	name VARCHAR(255) NOT NULL,
 	user_id INT UNSIGNED NOT NULL,
+	INDEX project_name_idx(name),
+	INDEX projects_user_id_idx(user_id),
+	UNIQUE KEY name_user_id_udx (name,user_id),
 	FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
@@ -28,12 +31,8 @@ CREATE TABLE tasks (
 	status TINYINT(1) DEFAULT 0 NOT NULL,
 	user_id INT UNSIGNED NOT NULL,
 	project_id INT UNSIGNED NOT NULL,
+	INDEX tasks_user_id_idx(user_id),
+	INDEX tasks_project_id_idx(project_id),
 	FOREIGN KEY (user_id) REFERENCES users(id),
 	FOREIGN KEY (project_id) REFERENCES projects(id)
 );
-
-CREATE INDEX project_name ON projects(name);
-CREATE INDEX projects_user_id ON projects(user_id);
-CREATE INDEX tasks_user_id ON tasks(user_id);
-CREATE INDEX tasks_project_id ON tasks(project_id);
-CREATE INDEX users_id ON users(id);
