@@ -28,11 +28,11 @@ VALUE ('Собеседование в IT компании', '2020-06-05', '2020-
 /*
 получить список из всех проектов для одного пользователя
 */
-SELECT * FROM projects WHERE user_id = '1';
+SELECT * FROM projects WHERE user_id = 1;
 /*
 получить список из всех задач для одного проекта
 */
-SELECT * FROM tasks WHERE project_id = '3';
+SELECT * FROM tasks WHERE project_id = 3;
 /*
 пометить задачу как выполненную
 */
@@ -40,4 +40,4 @@ UPDATE tasks SET status = true WHERE name = 'Заказать пиццу';
 /*
 обновить название задачи по её идентификатору
 */
-UPDATE tasks SET name = 'Заказать пиццу и колу' WHERE id = '6';
+UPDATE tasks SET name = 'Заказать пиццу и колу' WHERE id = 6;
