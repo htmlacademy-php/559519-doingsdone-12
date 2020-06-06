@@ -2,14 +2,14 @@
 /**
  * Подсчитывает количество задач в каждом из проектов
  * @param array $tasks_array Ассоциативный массив с данными
- * @param string $project_name Название проекта
- * @return int Если для аргумента $project_name не найдено элементов в массиве, то вернет ноль
+ * @param string $project_id ID проекта
+ * @return int Если для аргумента $project_id не найдено элементов в массиве, то вернет ноль
  */
-function task_count(array $tasks_array, $project_name) : int
+function task_count(array $tasks_array, $project_id) : int
 {
     $count = 0;
     foreach ($tasks_array as $task_item) {
-        if ($task_item['project_name'] === $project_name) {
+        if ($task_item['project_id'] === $project_id) {
             $count++;
         }
     }
