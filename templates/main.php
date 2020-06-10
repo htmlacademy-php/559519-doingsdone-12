@@ -5,8 +5,8 @@
                     <ul class="main-navigation__list">
 						<?php foreach ($projects as $project): ?>
                         <li class="main-navigation__list-item">
-                            <a class="main-navigation__list-item-link" href="#"><?= htmlspecialchars($project); ?></a>
-                            <span class="main-navigation__list-item-count"><?= task_count($tasks, $project)?></span>
+                            <a class="main-navigation__list-item-link" href="#"><?= htmlspecialchars($project['name']); ?></a>
+                            <span class="main-navigation__list-item-count"><?= task_count($tasks, $project['id'])?></span>
                         </li>
 						<?php endforeach; ?>
                     </ul>
@@ -43,22 +43,22 @@
                 <table class="tasks">
 					<?php foreach ($tasks as $task): ?>
 					<?php
-                        if ($task['complete_date'] != null) {
-                            $hours_remaining = getHoursBeforeDate($task['complete_date']);
+                        if ($task['deadline_time'] != null) {
+                            $hours_remaining = getHoursBeforeDate($task['deadline_time']);
                         }
-						if ($task['completed'] && ($show_complete_tasks === 0)) {
+						if ($task['status'] && ($show_complete_tasks === 0)) {
 							continue;
 						}
 					?>
-                    <tr class="tasks__item task <?= $task['completed'] ? 'task--completed' : '' ?><?= $hours_remaining > 0 && $hours_remaining <= 24 ? 'task--important' :  '' ?>">
+                    <tr class="tasks__item task <?= $task['status'] ? 'task--completed' : '' ?><?= $hours_remaining > 0 && $hours_remaining <= 24 ? 'task--important' :  '' ?>">
                         <td class="task__select">
                             <label class="checkbox task__checkbox">
-                                <input class="checkbox__input visually-hidden" type="checkbox" <?= $task['completed'] ? 'checked' : '' ?> >
+                                <input class="checkbox__input visually-hidden" type="checkbox" <?= $task['status'] ? 'checked' : '' ?> >
                                 <span class="checkbox__text"><?= htmlspecialchars($task['name']); ?></span>
                             </label>
                         </td>
 
-                        <td class="task__date"><?= $task['complete_date']; ?></td>
+                        <td class="task__date"><?= $task['deadline_time'] === null ? '' : date('d.m.Y', strtotime($task['deadline_time'])); ?></td>
                     </tr>
 					<?php endforeach; ?>
                     <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице-->
